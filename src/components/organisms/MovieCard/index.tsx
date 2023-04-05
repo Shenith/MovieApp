@@ -5,6 +5,7 @@ import MAText from '../../atoms/MAText.tsx';
 import theme from '../../../utils/theme';
 import {styles} from './styles';
 import MARateChip from '../../molecules/MARateChip';
+import {IMAGE_URL} from '../../../configs';
 
 interface Props {
   posterPath: string;
@@ -32,13 +33,18 @@ const MovieCard = ({
   return (
     <View style={styles.cardContainer}>
       <View style={styles.leftContainer}>
-        <Image source={{uri: posterPath}} style={styles.bannerImage} />
+        <Image
+          source={{uri: `${IMAGE_URL}${posterPath}`}}
+          style={styles.bannerImage}
+        />
         <View style={styles.progressCircleContainer}>
-          <MAProgressCircle fill={popularity} />
+          <MAProgressCircle
+            fill={popularity > 100 ? 100 : Math.trunc(popularity)}
+          />
         </View>
       </View>
       <View style={styles.rightContainer}>
-        <MAText type={'H5'}>{`#${index} ${originalTitle}`}</MAText>
+        <MAText type={'H5'}>{`#${index + 1} ${originalTitle}`}</MAText>
         <MAText type={'H6'} color={theme.colors.grey2} italic>
           {`(${title})`}
         </MAText>
@@ -50,7 +56,10 @@ const MovieCard = ({
             type={'body2'}
             color={theme.colors.grey2}
             style={styles.languageTag}>
-            {`(${originalLanguage})`}
+            {`(${
+              originalLanguage.charAt(0).toUpperCase() +
+              originalLanguage.slice(1)
+            })`}
           </MAText>
           <Text style={styles.divider}>{'\u26AB'}</Text>
           <MARateChip adult={adult} />
