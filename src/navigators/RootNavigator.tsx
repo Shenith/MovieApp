@@ -61,7 +61,7 @@ const RootNavigator = () => {
       Toast.show({
         type: 'successToast',
         props: {
-          message: 'Internet is back!',
+          message: 'You are online',
         },
       });
     }

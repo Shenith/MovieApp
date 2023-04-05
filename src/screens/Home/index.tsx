@@ -1,4 +1,10 @@
-import {FlatList, View} from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  Platform,
+  RefreshControl,
+  View,
+} from 'react-native';
 import React, {useEffect} from 'react';
 import {utilsScreenStyles} from '../../utils/styles';
 import MAHeader from '../../components/molecules/MAHeader';
@@ -6,10 +12,15 @@ import MovieCard from '../../components/organisms/MovieCard';
 import {useDispatch, useSelector} from 'react-redux';
 import {getMovies} from '../../redux/rootActions';
 import {AppDispatch, RootState} from '../../redux/store';
+import {styles} from './styles';
 
 const Home = () => {
-  const {movies} = useSelector((state: RootState) => state.movies);
+  const {movies, loading} = useSelector((state: RootState) => state.movies);
   const dispatch = useDispatch<AppDispatch>();
+
+  const reloadData = () => {
+    dispatch(getMovies(1));
+  };
 
   useEffect(() => {
     dispatch(getMovies(1));
@@ -18,8 +29,22 @@ const Home = () => {
   return (
     <View style={utilsScreenStyles.scrollContainer}>
       <MAHeader title={'Top Rated Movies'} />
+      {loading && Platform.OS === 'ios' && (
+        <ActivityIndicator style={styles.activityIndicator} />
+      )}
       <FlatList
         data={movies}
+        refreshing={loading}
+        refreshControl={
+          <RefreshControl
+            tintColor="transparent"
+            colors={['transparent']}
+            style={styles.refreshContainer}
+            refreshing={loading}
+            onRefresh={reloadData}
+            progressViewOffset={2}
+          />
+        }
         renderItem={({item, index}) => (
           <MovieCard
             key={item.id}
