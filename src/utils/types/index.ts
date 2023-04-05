@@ -6,7 +6,8 @@ export type TextType =
   | 'H5'
   | 'H6'
   | 'body1'
-  | 'body2';
+  | 'body2'
+  | 'body3';
 
 export interface Testable {
   testID: string;
