@@ -2,8 +2,8 @@ import {StyleProp, Text, TextStyle} from 'react-native';
 import React from 'react';
 import {Testable, TextType} from '../../../utils/types';
 import theme from '../../../utils/theme';
-import makeTestId from '../../../helpers/makeTestID';
 import {styles} from './styles';
+import makeTestId from '../../../utils/helpers/makeTestID';
 
 interface Props extends Partial<Testable> {
   style?: StyleProp<TextStyle> | undefined;

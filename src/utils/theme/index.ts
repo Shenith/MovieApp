@@ -5,6 +5,7 @@ const colors = {
   grey: '#ced0db',
   grey2: '#7d7d80',
   success: '#4ab56a',
+  error: '#AF4242',
 };
 
 const fontSize = {
