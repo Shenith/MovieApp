@@ -2,8 +2,7 @@ import {StyleSheet} from 'react-native';
 import theme from '../theme';
 
 export const utilsScreenStyles = StyleSheet.create({
-  container: {
+  mainContainer: {
     backgroundColor: theme.colors.white,
-    paddingHorizontal: 20,
   },
 });

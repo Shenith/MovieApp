@@ -18,6 +18,7 @@ const MAProgressCircle = ({fill}: Props) => {
       padding={2}
       rotation={0}
       style={styles.containerStyle}
+      tintTransparency={false}
       backgroundColor={theme.colors.grey}>
       {() => (
         <MAText type={'body3'} color={theme.colors.white}>

@@ -2,7 +2,7 @@ const colors = {
   white: '#FFFFFF',
   black: '#000000',
   primaryBlue: '#032541',
-  grey: '#bdc3c7',
+  grey: '#ADADAD',
   success: '#4ab56a',
 };
 
