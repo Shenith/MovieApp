@@ -1,11 +1,14 @@
 import React from 'react';
-import {SafeAreaView} from 'react-native';
+import {Platform, SafeAreaView, StatusBar} from 'react-native';
 import Home from './screens/Home';
-import theme from './utils/theme';
+import {utilsScreenStyles} from './utils/styles';
 
 const App = () => {
   return (
-    <SafeAreaView style={{backgroundColor: theme.colors.primaryBlue}}>
+    <SafeAreaView style={utilsScreenStyles.scrollContainer}>
+      <StatusBar
+        barStyle={Platform.OS === 'ios' ? 'light-content' : 'default'}
+      />
       <Home />
     </SafeAreaView>
   );
