@@ -19,6 +19,7 @@ export interface MoviesInitialState {
   loading: boolean;
   movies: MovieObject[];
   error: string;
+  lastLoadedPage: number;
 }
 
 export interface APIResponse {

@@ -15,15 +15,22 @@ import {AppDispatch, RootState} from '../../redux/store';
 import {styles} from './styles';
 
 const Home = () => {
-  const {movies, loading} = useSelector((state: RootState) => state.movies);
+  const {movies, loading, lastLoadedPage} = useSelector(
+    (state: RootState) => state.movies,
+  );
   const dispatch = useDispatch<AppDispatch>();
 
   const reloadData = () => {
     dispatch(getMovies(1));
   };
 
+  const fetchMoreData = () => {
+    dispatch(getMovies(lastLoadedPage + 1));
+  };
+
   useEffect(() => {
-    dispatch(getMovies(1));
+    dispatch(getMovies(lastLoadedPage + 1));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   return (
@@ -35,6 +42,8 @@ const Home = () => {
       <FlatList
         data={movies}
         refreshing={loading}
+        onEndReached={fetchMoreData}
+        onEndReachedThreshold={2}
         refreshControl={
           <RefreshControl
             tintColor="transparent"

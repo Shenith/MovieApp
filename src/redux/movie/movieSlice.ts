@@ -7,6 +7,7 @@ import {axiosInstance} from '../../utils/helpers/axiosApiUtil';
 const initialState: MoviesInitialState = {
   loading: false,
   movies: [],
+  lastLoadedPage: 0,
   error: '',
 };
 
@@ -34,12 +35,7 @@ export const getMovies = createAsyncThunk<
 const movieSlice = createSlice({
   name: 'movies',
   initialState,
-  reducers: {
-    loadMovieData: state => {
-      state.loading = false;
-      state.movies = state.movies;
-    },
-  },
+  reducers: {},
   extraReducers: builder => {
     builder
       .addCase(getMovies.pending, state => {
@@ -48,7 +44,12 @@ const movieSlice = createSlice({
       .addCase(getMovies.fulfilled, (state, action) => {
         state.loading = false;
         state.error = '';
-        state.movies = action.payload.data.results;
+        state.lastLoadedPage = action.payload.data.page;
+        if (action.payload.data.page > 1) {
+          state.movies = [...state.movies, ...action.payload.data.results];
+        } else {
+          state.movies = action.payload.data.results;
+        }
       })
       .addCase(getMovies.rejected, (state, action) => {
         state.loading = false;
@@ -57,6 +58,6 @@ const movieSlice = createSlice({
   },
 });
 
-export const {loadMovieData} = movieSlice.actions;
+export const {} = movieSlice.actions;
 
 export default movieSlice.reducer;
