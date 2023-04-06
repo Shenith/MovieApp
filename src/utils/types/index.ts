@@ -11,5 +11,5 @@ export type TextType =
 
 export interface Testable {
   testID: string;
-  accessibilityLabel: string;
+  accessibilityLabel?: string;
 }

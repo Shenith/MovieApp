@@ -34,7 +34,7 @@ const Home = () => {
 
   return (
     <View style={utilsScreenStyles.scrollContainer}>
-      <MAHeader title={'Top Rated Movies'} />
+      <MAHeader title={'Top Rated Movies'} testID={'dashboardHeader'} />
       {loading && Platform.OS === 'ios' && (
         <ActivityIndicator style={styles.activityIndicator} />
       )}

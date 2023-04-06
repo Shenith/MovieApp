@@ -1,12 +1,11 @@
 import {StyleSheet} from 'react-native';
 import theme from '../../../utils/theme';
 
-const {colors, fontSize} = theme;
+const {fontSize} = theme;
 
 export const styles = StyleSheet.create({
   text: {
     fontStyle: 'normal',
-    color: colors.black,
     //H1Text
     fontSize: fontSize.fs56,
   },
