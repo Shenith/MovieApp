@@ -21,7 +21,7 @@ const Home = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const reloadData = () => {
-    dispatch(getMovies(1));
+    dispatch(getMovies(lastLoadedPage + 1));
   };
 
   const fetchMoreData = () => {
@@ -29,8 +29,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    dispatch(getMovies(lastLoadedPage + 1));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    dispatch(getMovies(1));
   }, [dispatch]);
 
   return (

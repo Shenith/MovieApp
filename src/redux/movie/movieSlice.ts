@@ -12,7 +12,7 @@ const initialState: MoviesInitialState = {
 };
 
 export const getMovies = createAsyncThunk<
-  AxiosResponse<APIResponse, any>,
+  AxiosResponse<APIResponse, null>,
   number,
   {
     rejectValue: string;

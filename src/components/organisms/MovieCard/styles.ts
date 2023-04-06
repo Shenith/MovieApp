@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     flex: 2,
     flexDirection: 'column-reverse',
     alignItems: 'center',
-    backgroundColor: 'green',
+    backgroundColor: theme.colors.grey,
     borderRadius: 10,
   },
   bannerImage: {width: '100%', height: 200, borderRadius: 10},

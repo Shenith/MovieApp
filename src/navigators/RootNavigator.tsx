@@ -3,18 +3,19 @@ import {
   SafeAreaView,
   StatusBar,
   StyleProp,
-  View,
   ViewStyle,
 } from 'react-native';
 import React, {Fragment, useEffect} from 'react';
 import Home from '../screens/Home';
 import {utilsScreenStyles} from '../utils/styles';
 import Toast from 'react-native-toast-message';
-import {styles} from './styles';
-import theme from '../utils/theme';
-import MAText from '../components/atoms/MAText.tsx';
 import {useNetInfo} from '@react-native-community/netinfo';
 import MANetworkIndicator from '../components/molecules/MANetworkIndicator';
+import {useDispatch} from 'react-redux';
+import {AppDispatch} from '../redux/store';
+import {getMovies} from '../redux/rootActions';
+import MAToast from '../components/molecules/MAToast';
+import {ToastTypes} from '../constants';
 
 //Since this is a simple one page app, no react-navigation added
 
@@ -27,24 +28,13 @@ interface ToastProps {
 
 const RootNavigator = () => {
   const netInfo = useNetInfo();
+  const dispatch = useDispatch<AppDispatch>();
   const toastConfig = {
     successToast: ({props}: ToastProps) => (
-      <View style={[styles.successToastContainer, props.containerStyle]}>
-        <View style={styles.textContainer}>
-          <MAText type="H6" testID={'errorToast'} color={theme.colors.white}>
-            {props.message}
-          </MAText>
-        </View>
-      </View>
+      <MAToast props={props} type={ToastTypes.successToast} />
     ),
     errorToast: ({props}: ToastProps) => (
-      <View style={styles.errorToastContainer}>
-        <View style={styles.textContainer}>
-          <MAText type="H6" testID={'errorToast'} color={theme.colors.white}>
-            {props.message}
-          </MAText>
-        </View>
-      </View>
+      <MAToast props={props} type={ToastTypes.errorToast} />
     ),
   };
 
@@ -58,6 +48,7 @@ const RootNavigator = () => {
       });
     }
     if (netInfo?.isConnected === true) {
+      dispatch(getMovies(1));
       Toast.show({
         type: 'successToast',
         props: {
@@ -65,7 +56,7 @@ const RootNavigator = () => {
         },
       });
     }
-  }, [netInfo, netInfo?.isConnected]);
+  }, [netInfo, netInfo?.isConnected, dispatch]);
 
   return (
     <Fragment>
