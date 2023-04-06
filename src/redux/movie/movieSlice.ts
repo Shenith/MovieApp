@@ -1,8 +1,8 @@
-import {API_KEY} from './../../configs/index';
 import {MoviesInitialState, APIResponse} from './types';
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import axios, {AxiosResponse} from 'axios';
 import {axiosInstance} from '../../utils/helpers/axiosApiUtil';
+import {API_KEY} from '@env';
 
 const initialState: MoviesInitialState = {
   loading: false,
