@@ -41,7 +41,7 @@ const RootNavigator = () => {
   useEffect(() => {
     if (netInfo?.isConnected === false) {
       Toast.show({
-        type: 'errorToast',
+        type: ToastTypes.errorToast,
         props: {
           message: 'No internet connection',
         },
@@ -50,7 +50,7 @@ const RootNavigator = () => {
     if (netInfo?.isConnected === true) {
       dispatch(getMovies(1));
       Toast.show({
-        type: 'successToast',
+        type: ToastTypes.successToast,
         props: {
           message: 'You are online',
         },

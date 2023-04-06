@@ -8,14 +8,12 @@ interface Props {
   title: string;
 }
 
-const MAHeader = ({title}: Props) => {
-  return (
-    <View style={styles.container}>
-      <MAText type={'H4'} color={theme.colors.white}>
-        {title}
-      </MAText>
-    </View>
-  );
-};
+const MAHeader = ({title}: Props) => (
+  <View style={styles.container}>
+    <MAText type={'H4'} color={theme.colors.white}>
+      {title}
+    </MAText>
+  </View>
+);
 
 export default MAHeader;

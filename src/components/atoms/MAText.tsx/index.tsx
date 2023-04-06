@@ -9,11 +9,11 @@ interface Props extends Partial<Testable> {
   style?: StyleProp<TextStyle> | undefined;
   type?: TextType;
   color?: string;
-  children: string | number | JSX.Element | undefined;
-  onPress?: () => void;
+  children?: string | number | JSX.Element;
   italic?: boolean;
   numberOfLines?: number;
   maxLength?: number;
+  onPress?: () => void;
 }
 
 const {colors} = theme;
@@ -24,10 +24,10 @@ const MAText = ({
   children,
   color,
   testID = 'atom_MAText',
-  onPress,
   italic,
   numberOfLines,
   maxLength,
+  onPress,
 }: Props) => {
   const styleObject = Object.assign(
     {},

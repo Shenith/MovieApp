@@ -21,7 +21,7 @@ const Home = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const reloadData = () => {
-    dispatch(getMovies(lastLoadedPage + 1));
+    dispatch(getMovies(1));
   };
 
   const fetchMoreData = () => {
@@ -39,6 +39,7 @@ const Home = () => {
         <ActivityIndicator style={styles.activityIndicator} />
       )}
       <FlatList
+        keyExtractor={item => `${item.id}-${item.title}`}
         data={movies}
         refreshing={loading}
         onEndReached={fetchMoreData}
@@ -55,7 +56,6 @@ const Home = () => {
         }
         renderItem={({item, index}) => (
           <MovieCard
-            key={item.id}
             posterPath={item.poster_path}
             popularity={item.popularity}
             index={index}

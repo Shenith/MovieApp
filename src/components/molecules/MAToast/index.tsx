@@ -13,22 +13,20 @@ interface MAToastProps {
   type: ToastTypes.errorToast | ToastTypes.successToast;
 }
 
-const MAToast = ({props, type}: MAToastProps) => {
-  return (
-    <View
-      style={[
-        type === ToastTypes.successToast
-          ? styles.successToastContainer
-          : styles.errorToastContainer,
-        props.containerStyle,
-      ]}>
-      <View style={styles.textContainer}>
-        <MAText type="H6" color={theme.colors.white}>
-          {props.message}
-        </MAText>
-      </View>
+const MAToast = ({props, type}: MAToastProps) => (
+  <View
+    style={[
+      type === ToastTypes.successToast
+        ? styles.successToastContainer
+        : styles.errorToastContainer,
+      props.containerStyle,
+    ]}>
+    <View style={styles.textContainer}>
+      <MAText type="H6" color={theme.colors.white}>
+        {props.message}
+      </MAText>
     </View>
-  );
-};
+  </View>
+);
 
 export default MAToast;
