@@ -9,6 +9,7 @@ It includes ***lazy loading***, ***pre-fetched data for offline use***, ***pull-
 This project was built using:
 -   React Native version 0.70.6
 -   Node.js version 14.17.6
+-   npm version 7.21.1
 
 #  Installation
 
