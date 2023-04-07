@@ -4,8 +4,10 @@ import MAText from '../../atoms/MAText.tsx';
 import {styles} from './styles';
 import theme from '../../../utils/theme';
 import {ToastTypes} from '../../../constants';
+import {Testable} from '../../../utils/types';
+import makeTestId from '../../../utils/helpers/makeTestID';
 
-interface MAToastProps {
+interface MAToastProps extends Partial<Testable> {
   props: {
     message: string;
     containerStyle?: StyleProp<ViewStyle>;
@@ -13,8 +15,9 @@ interface MAToastProps {
   type: ToastTypes.errorToast | ToastTypes.successToast;
 }
 
-const MAToast = ({props, type}: MAToastProps) => (
+const MAToast = ({props, type, testID = 'molecule_MAToast'}: MAToastProps) => (
   <View
+    testID={makeTestId(testID)}
     style={[
       type === ToastTypes.successToast
         ? styles.successToastContainer

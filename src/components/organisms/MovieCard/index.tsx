@@ -6,8 +6,10 @@ import theme from '../../../utils/theme';
 import {styles} from './styles';
 import MARateChip from '../../molecules/MARateChip';
 import {IMAGE_URL} from '../../../configs';
+import {Testable} from '../../../utils/types';
+import makeTestId from '../../../utils/helpers/makeTestID';
 
-interface Props {
+interface Props extends Partial<Testable> {
   posterPath: string;
   popularity: number;
   index: number;
@@ -29,8 +31,9 @@ const MovieCard = ({
   originalLanguage,
   adult,
   overview,
+  testID = 'MovieCard',
 }: Props) => (
-  <View style={styles.cardContainer}>
+  <View style={styles.cardContainer} testID={makeTestId(testID)}>
     <View style={styles.leftContainer}>
       <Image
         source={{uri: `${IMAGE_URL}${posterPath}`}}
