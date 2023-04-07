@@ -1,10 +1,4 @@
-import {
-  ActivityIndicator,
-  FlatList,
-  Platform,
-  RefreshControl,
-  View,
-} from 'react-native';
+import {FlatList, RefreshControl, View} from 'react-native';
 import React, {useEffect} from 'react';
 import {utilsScreenStyles} from '../../utils/styles';
 import MAHeader from '../../components/molecules/MAHeader';
@@ -13,6 +7,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getMovies} from '../../redux/rootActions';
 import {AppDispatch, RootState} from '../../redux/store';
 import {styles} from './styles';
+import MovieEmptyComponent from '../../components/organisms/MovieEmptyComponent';
+import MALoader from '../../components/atoms/MALoader';
 
 const Home = () => {
   const {movies, loading, lastLoadedPage} = useSelector(
@@ -35,9 +31,7 @@ const Home = () => {
   return (
     <View style={utilsScreenStyles.scrollContainer}>
       <MAHeader title={'Top Rated Movies'} testID={'dashboardHeader'} />
-      {loading && Platform.OS === 'ios' && (
-        <ActivityIndicator style={styles.activityIndicator} />
-      )}
+      {loading && <MALoader />}
       <FlatList
         keyExtractor={item => `${item.id}-${item.title}`}
         data={movies}
@@ -67,6 +61,7 @@ const Home = () => {
             overview={item.overview}
           />
         )}
+        ListEmptyComponent={!loading ? <MovieEmptyComponent /> : null}
       />
     </View>
   );

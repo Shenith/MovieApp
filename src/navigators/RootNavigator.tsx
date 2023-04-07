@@ -5,7 +5,7 @@ import {
   StyleProp,
   ViewStyle,
 } from 'react-native';
-import React, {Fragment, useEffect} from 'react';
+import React, {Fragment, useEffect, useRef} from 'react';
 import Home from '../screens/Home';
 import {utilsScreenStyles} from '../utils/styles';
 import Toast from 'react-native-toast-message';
@@ -29,6 +29,7 @@ interface ToastProps {
 const RootNavigator = () => {
   const netInfo = useNetInfo();
   const dispatch = useDispatch<AppDispatch>();
+  const hidePopup = useRef(true);
   const toastConfig = {
     successToast: ({props}: ToastProps) => (
       <MAToast props={props} type={ToastTypes.successToast} />
@@ -41,6 +42,7 @@ const RootNavigator = () => {
   useEffect(() => {
     if (netInfo?.isConnected === false) {
       Toast.show({
+        autoHide: false,
         type: ToastTypes.errorToast,
         props: {
           message: 'No internet connection',
@@ -48,15 +50,20 @@ const RootNavigator = () => {
       });
     }
     if (netInfo?.isConnected === true) {
-      dispatch(getMovies(1));
-      Toast.show({
-        type: ToastTypes.successToast,
-        props: {
-          message: 'You are online',
-        },
-      });
+      if (hidePopup.current) {
+        hidePopup.current = false;
+        return;
+      } else {
+        dispatch(getMovies(1));
+        Toast.show({
+          type: ToastTypes.successToast,
+          props: {
+            message: 'You are online',
+          },
+        });
+      }
     }
-  }, [netInfo, netInfo?.isConnected, dispatch]);
+  }, [netInfo?.isConnected, dispatch]);
 
   return (
     <Fragment>
