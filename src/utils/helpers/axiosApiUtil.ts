@@ -15,6 +15,7 @@ axiosInstance.interceptors.response.use(
     console.log(error);
     if (axios.isAxiosError(error)) {
       Toast.show({
+        autoHide: false,
         type: ToastTypes.errorToast,
         props: {
           message: getErrorMessage(error).errorMessage,
@@ -22,6 +23,7 @@ axiosInstance.interceptors.response.use(
       });
     } else {
       Toast.show({
+        autoHide: false,
         type: ToastTypes.errorToast,
         props: {
           message: 'An unexpected error occurred',

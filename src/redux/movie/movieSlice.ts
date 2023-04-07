@@ -1,3 +1,4 @@
+import {getErrorMessage} from './../../utils/helpers/getErrorMessage';
 import {MoviesInitialState, APIResponse} from './types';
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import axios, {AxiosResponse} from 'axios';
@@ -25,7 +26,7 @@ export const getMovies = createAsyncThunk<
     return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      return rejectWithValue(error.response?.data as string);
+      return rejectWithValue(getErrorMessage(error).errorMessage);
     } else {
       return rejectWithValue('An unexpected error occurred');
     }
@@ -53,7 +54,9 @@ const movieSlice = createSlice({
       })
       .addCase(getMovies.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.payload ? action?.payload : 'error';
+        state.error = action?.payload
+          ? action?.payload
+          : 'Something went wrong!';
       });
   },
 });
