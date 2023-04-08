@@ -41,6 +41,7 @@ const RootNavigator = () => {
 
   useEffect(() => {
     if (netInfo?.isConnected === false) {
+      hidePopup.current = false;
       Toast.show({
         autoHide: false,
         type: ToastTypes.errorToast,
